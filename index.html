@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCQ Exam</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-3xl font-bold text-center mb-6">MCQ Exam</h1>
+    <div id="quiz-container">
+      <!-- Questions will be dynamically inserted here -->
+    </div>
+    <div id="timer" class="text-center text-xl font-semibold my-4">
+      Time Left: <span id="time-left">10</span>s
+    </div>
+    <div id="result" class="hidden text-center text-2xl font-bold mt-6">
+      Your Score: <span id="score">0</span> / <span id="total-questions">0</span>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
