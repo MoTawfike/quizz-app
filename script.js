@@ -156,19 +156,21 @@ function handleAnswer(selectedAnswer) {
 
 // Start the timer for each question
 function startTimer() {
+    clearInterval(timer) // Added to make sure the timer gets cleared before starting again.
     timer = setInterval(() => {
-        timerElement.textContent = timeLeft; // Update the timer display before checking if time is up
-        timeLeft--;
+        if (timeLeft >= 0) {
+             timerElement.textContent = timeLeft; // Update the timer display before checking if time is up
+             timeLeft--;
+        }
 
 
         if (timeLeft < 0) { // Check after decrementing
              clearInterval(timer);
-            handleAnswer(null);
+             handleAnswer(null);
         }
 
     }, 1000);
 }
-
 
 // Navigate to the next question
 function nextQuestion() {
