@@ -7,18 +7,33 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
-    <h1 class="text-3xl font-bold text-center mb-6">MCQ Exam</h1>
-    <div id="quiz-container">
-      <!-- Questions will be dynamically inserted here -->
+<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h1 class="text-3xl font-bold text-center mb-6">Biology MCQ Exam</h1>
+    <div id="start-form">
+        <div class="mb-4">
+            <label for="student-name" class="block text-gray-700 text-sm font-bold mb-2">Student Name:</label>
+            <input type="text" id="student-name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <label for="mobile-number" class="block text-gray-700 text-sm font-bold mb-2">Mobile Number:</label>
+            <input type="tel" id="mobile-number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <button id="start-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Start Exam</button>
     </div>
-    <div id="timer" class="text-center text-xl font-semibold my-4">
-      Time Left: <span id="time-left">30</span>s
+    <div id="quiz-container" class="hidden">
+        <!-- Questions will be dynamically inserted here -->
     </div>
-    <div id="result" class="hidden text-center text-2xl font-bold mt-6">
-      Your Score: <span id="score">0</span> / <span id="total-questions">0</span>
-    </div>
+  <div class="flex justify-between items-center">
+        <div id="progress" class="text-sm text-gray-600 hidden"></div>
+        <div id="timer" class="text-center text-xl font-semibold my-4 hidden">
+          Time Left: <span id="time-left">30</span>s
+        </div>
   </div>
-  <script src="script.js"></script>
+    <div id="result" class="hidden text-center text-2xl font-bold mt-6">
+        Your Score: <span id="score">0</span> / <span id="total-questions">0</span>
+      <div id="email-link"></div>
+    </div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
