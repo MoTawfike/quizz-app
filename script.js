@@ -83,9 +83,9 @@ startButton.addEventListener("click", function () {
     studentName = document.getElementById("student-name").value;
     mobileNumber = document.getElementById("mobile-number").value;
 
-    if(studentName.trim() === "" || mobileNumber.trim() === ""){
+    if (studentName.trim() === "" || mobileNumber.trim() === "") {
         alert("Please Enter Student Name and Mobile number")
-    } else{
+    } else {
         startForm.classList.add("hidden");
         quizContainer.classList.remove("hidden");
         progressElement.classList.remove("hidden");
@@ -107,16 +107,16 @@ function displayQuestion() {
             <h2 class="text-xl font-semibold mb-4">${question.question}</h2>
             <div class="space-y-3">
                 ${question.options
-        .map(
-            (option) => `
+                    .map(
+                        (option) => `
               <button onclick="handleAnswer('${option}')"
                       class="w-full bg-gray-200 hover:bg-gray-300 text-left p-3 rounded-lg"
                        id="option-${option}">
                  ${option}
               </button>
             `
-        )
-        .join("")}
+                    )
+                    .join("")}
             </div>
         </div>
     `;
@@ -126,6 +126,7 @@ function displayQuestion() {
     startTimer();
     updateUI();
 }
+
 // Handle user's answer
 function handleAnswer(selectedAnswer) {
     clearInterval(timer);
@@ -142,10 +143,11 @@ function handleAnswer(selectedAnswer) {
     if (selectedAnswer === question.answer) {
         score++;
         selectedButton.classList.add("bg-green-300", "font-bold");
-    } else {
+    } else if (selectedAnswer !== null){
         selectedButton.classList.add("bg-red-300", "line-through");
         correctButton.classList.add("bg-green-300", "font-bold");
     }
+
     answeredQuestions[currentQuestionIndex] = true;
     setTimeout(() => {
         nextQuestion();
@@ -155,14 +157,18 @@ function handleAnswer(selectedAnswer) {
 // Start the timer for each question
 function startTimer() {
     timer = setInterval(() => {
+        timerElement.textContent = timeLeft; // Update the timer display before checking if time is up
         timeLeft--;
-        timerElement.textContent = timeLeft;
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            handleAnswer(null); // Move to next question if time runs out
+
+
+        if (timeLeft < 0) { // Check after decrementing
+             clearInterval(timer);
+            handleAnswer(null);
         }
+
     }, 1000);
 }
+
 
 // Navigate to the next question
 function nextQuestion() {
