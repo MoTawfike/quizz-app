@@ -15,60 +15,60 @@ const questions = [
         answer: "Photosynthesis",
         timeLimit: 30,
     },
-  {
-    question: "Which molecule is responsible for carrying genetic information?",
-    options: ["Protein", "Lipid", "Carbohydrate", "DNA"],
-    answer: "DNA",
-    timeLimit: 30,
-  },
-  {
-    question: "What is the role of ribosomes in a cell?",
-      options: ["Energy production", "Protein synthesis", "Waste removal", "Lipid storage"],
-      answer: "Protein synthesis",
-    timeLimit: 30,
-  },
-  {
-    question: "Which process is responsible for the transport of water in plants?",
+    {
+        question: "Which molecule is responsible for carrying genetic information?",
+        options: ["Protein", "Lipid", "Carbohydrate", "DNA"],
+        answer: "DNA",
+        timeLimit: 30,
+    },
+    {
+        question: "What is the role of ribosomes in a cell?",
+        options: ["Energy production", "Protein synthesis", "Waste removal", "Lipid storage"],
+        answer: "Protein synthesis",
+        timeLimit: 30,
+    },
+    {
+        question: "Which process is responsible for the transport of water in plants?",
         options: ["Transpiration", "Respiration", "Photosynthesis", "Digestion"],
         answer: "Transpiration",
         timeLimit: 30,
     },
     {
-      question: "What is the function of the mitochondria in cells?",
-      options: ["Protein synthesis", "Lipid synthesis", "Energy production", "DNA replication"],
-      answer: "Energy production",
-      timeLimit: 30,
+        question: "What is the function of the mitochondria in cells?",
+        options: ["Protein synthesis", "Lipid synthesis", "Energy production", "DNA replication"],
+        answer: "Energy production",
+        timeLimit: 30,
     },
-  {
-    question: "Which of the following is NOT a type of tissue?",
-      options: ["Nervous tissue", "Epithelial tissue", "Muscular tissue", "Digestive tissue"],
+    {
+        question: "Which of the following is NOT a type of tissue?",
+        options: ["Nervous tissue", "Epithelial tissue", "Muscular tissue", "Digestive tissue"],
         answer: "Digestive tissue",
-    timeLimit: 30,
-  },
+        timeLimit: 30,
+    },
     {
-      question: "What is the process by which cells divide and multiply?",
-      options: ["Mitosis", "Meiosis", "Osmosis", "Diffusion"],
+        question: "What is the process by which cells divide and multiply?",
+        options: ["Mitosis", "Meiosis", "Osmosis", "Diffusion"],
         answer: "Mitosis",
-      timeLimit: 30,
+        timeLimit: 30,
     },
     {
-      question: "Which is the largest organ in the human body?",
-      options: ["Heart", "Brain", "Liver", "Skin"],
-      answer: "Skin",
-      timeLimit: 30,
+        question: "Which is the largest organ in the human body?",
+        options: ["Heart", "Brain", "Liver", "Skin"],
+        answer: "Skin",
+        timeLimit: 30,
     },
-   {
-      question: "What is the role of the enzyme amylase?",
-      options: ["Break down proteins", "Break down fats", "Break down carbohydrates", "Break down nucleic acids"],
-      answer: "Break down carbohydrates",
-      timeLimit: 30,
+    {
+        question: "What is the role of the enzyme amylase?",
+        options: ["Break down proteins", "Break down fats", "Break down carbohydrates", "Break down nucleic acids"],
+        answer: "Break down carbohydrates",
+        timeLimit: 30,
     },
-  {
-      question: "Which gas is a waste product of cellular respiration?",
+    {
+        question: "Which gas is a waste product of cellular respiration?",
         options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
         answer: "Carbon dioxide",
-    timeLimit: 30,
-  }
+        timeLimit: 30,
+    }
 ];
 
 let currentQuestionIndex = 0;
@@ -83,29 +83,31 @@ startButton.addEventListener("click", function () {
     studentName = document.getElementById("student-name").value;
     mobileNumber = document.getElementById("mobile-number").value;
 
-  if(studentName.trim() === "" || mobileNumber.trim() === ""){
-    alert("Please Enter Student Name and Mobile number")
-  } else{
-    startForm.classList.add("hidden");
-    quizContainer.classList.remove("hidden");
-    progressElement.classList.remove("hidden");
-    timerElement.classList.remove("hidden");
-    displayQuestion();
-  }
+    if(studentName.trim() === "" || mobileNumber.trim() === ""){
+        alert("Please Enter Student Name and Mobile number")
+    } else{
+        startForm.classList.add("hidden");
+        quizContainer.classList.remove("hidden");
+        progressElement.classList.remove("hidden");
+        timerElement.classList.remove("hidden");
+        displayQuestion();
+    }
 });
+
 // Function to update the UI
 function updateUI() {
-  updateProgress();
+    updateProgress();
 }
+
 // Display a question
 function displayQuestion() {
-  const question = questions[currentQuestionIndex];
-  quizContainer.innerHTML = `
+    const question = questions[currentQuestionIndex];
+    quizContainer.innerHTML = `
         <div class="mb-6">
             <h2 class="text-xl font-semibold mb-4">${question.question}</h2>
             <div class="space-y-3">
                 ${question.options
-          .map(
+        .map(
             (option) => `
               <button onclick="handleAnswer('${option}')"
                       class="w-full bg-gray-200 hover:bg-gray-300 text-left p-3 rounded-lg"
@@ -113,22 +115,21 @@ function displayQuestion() {
                  ${option}
               </button>
             `
-          )
-          .join("")}
+        )
+        .join("")}
             </div>
         </div>
     `;
 
-  timeLeft = question.timeLimit;
-  timerElement.textContent = timeLeft;
-  startTimer();
+    timeLeft = question.timeLimit;
+    timerElement.textContent = timeLeft;
+    startTimer();
     updateUI();
 }
-
 // Handle user's answer
 function handleAnswer(selectedAnswer) {
-  clearInterval(timer);
-  const question = questions[currentQuestionIndex];
+    clearInterval(timer);
+    const question = questions[currentQuestionIndex];
     const correctButton = document.getElementById(`option-${question.answer}`);
     const selectedButton = document.getElementById(`option-${selectedAnswer}`);
 
@@ -137,18 +138,20 @@ function handleAnswer(selectedAnswer) {
         const button = document.getElementById(`option-${option}`);
         button.disabled = true;
     });
-  if (selectedAnswer === question.answer) {
-    score++;
-    selectedButton.classList.add("bg-green-300", "font-bold");
-  } else {
-    selectedButton.classList.add("bg-red-300", "line-through");
-      correctButton.classList.add("bg-green-300", "font-bold")
-  }
-  answeredQuestions[currentQuestionIndex] = true;
-  setTimeout(() => {
-    nextQuestion();
-  }, 1000);
+
+    if (selectedAnswer === question.answer) {
+        score++;
+        selectedButton.classList.add("bg-green-300", "font-bold");
+    } else {
+        selectedButton.classList.add("bg-red-300", "line-through");
+        correctButton.classList.add("bg-green-300", "font-bold");
+    }
+    answeredQuestions[currentQuestionIndex] = true;
+    setTimeout(() => {
+        nextQuestion();
+    }, 1000);
 }
+
 // Start the timer for each question
 function startTimer() {
     timer = setInterval(() => {
@@ -156,34 +159,35 @@ function startTimer() {
         timerElement.textContent = timeLeft;
         if (timeLeft <= 0) {
             clearInterval(timer);
-            handleAnswer(null);
+            handleAnswer(null); // Move to next question if time runs out
         }
     }, 1000);
 }
+
 // Navigate to the next question
 function nextQuestion() {
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    displayQuestion();
-  } else {
-    showResult();
-  }
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        displayQuestion();
+    } else {
+        showResult();
+    }
 }
 
 // Display quiz progress
 function updateProgress() {
-  progressElement.textContent = `Question: ${currentQuestionIndex + 1} / ${questions.length}`;
+    progressElement.textContent = `Question: ${currentQuestionIndex + 1} / ${questions.length}`;
 }
 
 // Show the final result
 function showResult() {
-  quizContainer.innerHTML = "";
+    quizContainer.innerHTML = "";
     timerElement.classList.add("hidden");
-  progressElement.classList.add("hidden");
-  resultElement.classList.remove("hidden");
-  scoreElement.textContent = score;
-  totalQuestionsElement.textContent = questions.length;
-  sendEmail();
+    progressElement.classList.add("hidden");
+    resultElement.classList.remove("hidden");
+    scoreElement.textContent = score;
+    totalQuestionsElement.textContent = questions.length;
+    sendEmail();
 }
 
 function sendEmail() {
